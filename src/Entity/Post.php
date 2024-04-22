@@ -24,7 +24,7 @@ class Post
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $body = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, enumType: PostState::class)]
     private PostState $state = PostState::Draft;
 
     public function getId(): ?int
