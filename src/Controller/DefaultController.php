@@ -14,8 +14,9 @@ class DefaultController extends AbstractController
     #[Route('/', methods: 'GET')]
     public function homepage(): Response
     {
-        return new Response('<html><head><title>Accueil</title></head><body>
-    <h1>Bienvenue !</h1>
-</body></html>');
+        // helper from AbstractController
+        return $this->render('default/homepage.html.twig', [
+            'my_var' => 'Hello',
+        ]);
     }
 }

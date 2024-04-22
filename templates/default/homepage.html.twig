@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{# En héritant d'un template parent, il n'est plus possible que d'écrire dans des blocs. #}
+
+{% block body %}
+    <h1>Accueil</h1>
+    {# Les interpolations évaluent des expressions et les insèrent sous forme de chaînes de caractères.  #}
+    <p>{{ my_var }}</p>
+    <p>{{ 2 + 3 }}</p>
+{% endblock %}
