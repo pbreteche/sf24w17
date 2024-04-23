@@ -9,9 +9,5 @@
         <input type="search" id="search-query" name="q">
         <button>🔎</button>
     </form>
-<ul>
-    {% for post in posts %}
-    <li><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a></li>
-    {% endfor %}
-</ul>
+    {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}
 {% endblock %}
