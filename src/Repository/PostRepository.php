@@ -32,6 +32,7 @@ class PostRepository extends ServiceEntityRepository
         return $this->getEntityManager()->createQuery('
             SELECT p FROM '.Post::class.' p
             WHERE p.title LIKE :query')
+            ->setMaxResults(10)
             ->setParameter('query', '%'.$searchQuery.'%')
             ->getResult()
         ;
