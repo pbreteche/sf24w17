@@ -60,7 +60,7 @@ class PostController extends AbstractController
     ): Response {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post, [
-            'state_placeholder' => false,
+            'validation_groups' => ['Default', 'create']
         ]);
         $form->handleRequest($request);
 

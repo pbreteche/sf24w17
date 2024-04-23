@@ -22,7 +22,7 @@ class Post
     private ?string $title = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\GreaterThan('now')]
+    #[Assert\GreaterThan('now', groups: ['create'])]
     private ?\DateTimeImmutable $publishedAt = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
