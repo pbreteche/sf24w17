@@ -6,6 +6,7 @@ use App\Enum\PostState;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -16,12 +17,16 @@ class Post
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 80)]
     private ?string $title = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\GreaterThan('now')]
     private ?\DateTimeImmutable $publishedAt = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Length(min: 50)]
     private ?string $body = null;
 
     #[ORM\Column(length: 255, enumType: PostState::class)]
