@@ -40,7 +40,7 @@ class PostController extends AbstractController
         $searchQuery = $request->query->get('q');
 
         if ($searchQuery) {
-            $searchResult = $postRepository->findByTitleLike($searchQuery);
+            $searchResult = $postRepository->findByTitleLikeWithQueryBuilder($searchQuery);
         }
 
         return $this->render('post/search.html.twig', [
