@@ -2,8 +2,8 @@
 
 {% block body %}
     <h1>Édition de {{ post.title }}</h1>
-    {{ form_start(form_edit) }}
-    {{ form_widget(form_edit) }}
-    <button>Enregistrer la modification</button>
-    {{ form_end(form_edit) }}
+    {{ include('post/_form.html.twig', {
+        form: form_edit,
+        action: 'Enregistrer la modification'
+    }) }}
 {% endblock %}
