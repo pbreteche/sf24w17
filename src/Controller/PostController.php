@@ -19,4 +19,20 @@ class PostController extends AbstractController
             'posts' => $posts,
         ]);
     }
+
+    #[Route('/post/{id}', requirements: ['id' => '\d+'], methods: 'GET')]
+    public function show(
+        int $id,
+        PostRepository $postRepository,
+    ): Response {
+        $post = $postRepository->findOneBy(['id' => $id]);
+
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
 }
