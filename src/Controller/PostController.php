@@ -9,9 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/post')]
 class PostController extends AbstractController
 {
-    #[Route('/post', methods: 'GET')]
+    #[Route(methods: 'GET')]
     public function index(
         PostRepository $postRepository,
     ): Response {
@@ -22,7 +23,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/post/{id<\d+>}', methods: 'GET')]
+    #[Route('/{id<\d+>}', methods: 'GET')]
     public function show(
         Post $post,
     ): Response {
@@ -31,7 +32,7 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/post/search')]
+    #[Route('/search', methods: 'GET')]
     public function search(
         Request $request,
         PostRepository $postRepository,
