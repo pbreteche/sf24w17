@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +47,37 @@ class PostController extends AbstractController
         return $this->render('post/search.html.twig', [
             'posts' => $searchResult ?? [],
             'query' => $searchQuery,
+        ]);
+    }
+
+    #[Route('/new', methods: ['GET', 'POST'])]
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager,
+    ): Response {
+        $post = new Post();
+        $form = $this->createFormBuilder($post)
+            ->add('title')
+            ->add('publishedAt')
+            ->add('body')
+            ->getForm()
+        ;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Marque l'entité comme devant être stockée en base
+            $manager->persist($post);
+            // Synchronise la base d'après le suivi des modifications sur les entités
+            $manager->flush();
+            // Les messages Flash Symfony sont enregistrée en session utilisateur.
+            // Ils sont supprimés automatiquement au premier accès en lecture.
+            $this->addFlash('success', 'La publication a bien été enregistrée.');
+
+            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('post/new.html.twig', [
+            'form_new' => $form,
         ]);
     }
 }

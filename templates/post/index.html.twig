@@ -9,5 +9,6 @@
         <input type="search" id="search-query" name="q">
         <button>🔎</button>
     </form>
+    <a href="{{ path('app_post_new') }}">Nouvelle</a>
     {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}
 {% endblock %}

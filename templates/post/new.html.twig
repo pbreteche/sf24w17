@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nouvelle publication</h1>
+    {{ form_start(form_new) }}
+    {{ form_widget(form_new) }}
+    <button>Enregistrer</button>
+    {{ form_end(form_new) }}
+{% endblock %}
