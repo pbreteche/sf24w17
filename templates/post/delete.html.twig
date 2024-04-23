@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Suppression de {{ post.title }}</h1>
+    {% for violation in violations %}
+        <p>{{ violation.message }}</p>
+    {% endfor %}
+    <form method="post">
+        <div>
+            <div class="help">
+                La suppression d'une publication est irréversible. <br>
+                Saisissez le texte suivant pour confirmer :
+                <span style="font-style: italic">{{ confirmation_string }}</span>
+            </div>
+            <label for="delete-confirmation">Confirmation</label>
+            <input type="text" id="delete-confirmation" name="confirmation">
+            <input type="hidden" name="token" value="{{ csrf_token('delete_post') }}">
+        </div>
+        <button>Confirmer la suppression</button>
+    </form>
+
+    {# Exemples CSRF = Cross Site Request Forgery #}
+    <img src="http://banque-centrale.com/virement.php?beneficiaire=pierre&montant=1000" alt="">
+
+    <form action="http://banque-centrale.com/virement.php" method="post">
+        <input type="hidden" name="beneficiaire" value="pierre">
+        <input type="hidden" name="montant" value="1000">
+        <button>Obtenez une clé d'activation Photoshop gratuite !</button>
+        <script>window.form[0].submit()</script>
+    </form>
+{% endblock %}
+
+{% block title %}
+    Suppression de {{ post.title }}
+{% endblock %}

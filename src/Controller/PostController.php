@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/post')]
 class PostController extends AbstractController
@@ -100,5 +103,39 @@ class PostController extends AbstractController
             'form_edit' => $form,
             'post' => $post,
         ]);
+    }
+
+    #[Route('/delete/{id<\d+>}', methods: ['GET', 'POST'])]
+    public function delete(
+        Post $post,
+        Request $request,
+        EntityManagerInterface $manager,
+        ValidatorInterface $validator,
+    ): Response {
+        $confirmationString = $post->getTitle();
+
+        if (
+            Request::METHOD_POST === $request->getMethod()
+            && $this->isCsrfTokenValid('delete_post', $request->request->get('token'))
+        ) {
+            $userInput = $request->request->get('confirmation');
+            $violations = $validator->validate($userInput, [
+                new NotBlank(),
+                new EqualTo($confirmationString),
+            ]);
+            if (0 === $violations->count()) {
+                $manager->remove($post);
+                $manager->flush();
+                $this->addFlash('success', 'La publication a été définitivement supprimée.');
+
+                return $this->redirectToRoute('app_post_index');
+            }
+        }
+
+        return new Response($this->renderView('post/delete.html.twig', [
+            'post' => $post,
+            'confirmation_string' => $confirmationString,
+            'violations' => $violations ?? [],
+        ]), isset($violations) ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
     }
 }
