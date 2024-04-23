@@ -21,6 +21,22 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    /**
+     * @return Post[]
+     */
+    public function findByTitleLike(string $searchQuery): array
+    {
+        // Syntaxe DQL
+        // * limitée dénominateur commun à MySQL, Postgres, SQLite, etc.
+        // * travaille autour des classes d'entité, et non sur les tables
+        return $this->getEntityManager()->createQuery('
+            SELECT p FROM '.Post::class.' p
+            WHERE p.title LIKE :query')
+            ->setParameter('query', '%'.$searchQuery.'%')
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+    <h1>Recherche</h1>
+    <form action="{{ path('app_post_search') }}">
+        <label for="search-query">Recherche</label>
+        <input type="search" id="search-query" name="q" value="{{ query }}">
+        <button>🔎</button>
+    </form>
+    <ul>
+        {% for post in posts %}
+            <li><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a></li>
+        {% else %}
+            <li>Pas de résultat</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
