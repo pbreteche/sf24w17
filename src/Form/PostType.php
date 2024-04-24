@@ -23,6 +23,9 @@ class PostType extends AbstractType
                 'placeholder' => $options['state_placeholder'] ? '--' : null,
                 'class' => PostState::class,
             ])
+            ->add('filedIn', options: [
+                'choice_label' => 'name',
+            ])
         ;
     }
 

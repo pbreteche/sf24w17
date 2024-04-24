@@ -3,6 +3,7 @@
 {% block body %}
     <h1>{{ post.title }}</h1>
     <p>Publié le : {{ post.publishedAt | date('d/m/y H:i') }}</p>
+    <p>Catégorie : {{ post.filedIn.name | default('aucune') }}</p>
     <div>
         {{ post.body | nl2br }}
     </div>
