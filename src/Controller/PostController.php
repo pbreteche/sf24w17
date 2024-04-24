@@ -138,4 +138,40 @@ class PostController extends AbstractController
             'violations' => $violations ?? [],
         ]), isset($violations) ? Response::HTTP_UNPROCESSABLE_ENTITY : Response::HTTP_OK);
     }
+
+    #[Route('/delete2/{id<\d+>}', methods: ['GET', 'POST'])]
+    public function delete2(
+        Post $post,
+        Request $request,
+        EntityManagerInterface $manager,
+    ): Response {
+        $confirmationString = $post->getTitle();
+        $form = $this->createFormBuilder()
+            ->add('confirmation', options: [
+                'constraints' => [
+                    new NotBlank(),
+                    new EqualTo($confirmationString),
+                ],
+                'help' => sprintf('La suppression d\'une publication est irréversible. <br>
+        Saisissez le texte suivant pour confirmer :
+                <span style="font-style: italic">%s</span>', $confirmationString),
+                'help_html' => true,
+            ])
+            ->getForm()
+        ;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->remove($post);
+            $manager->flush();
+            $this->addFlash('success', 'La publication a été définitivement supprimée.');
+
+            return $this->redirectToRoute('app_post_index');
+        }
+
+        return $this->render('post/delete2.html.twig', [
+            'post' => $post,
+            'delete_form' => $form,
+        ]);
+    }
 }
