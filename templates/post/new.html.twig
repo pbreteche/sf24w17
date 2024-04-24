@@ -7,3 +7,9 @@
         action: 'Enregistrer'
     }) }}
 {% endblock %}
+
+{#
+    Il est possible d'utiliser la fonction "parent()" pour récupérer le contenu du bloc parent.
+    Ne pas utiliser dans le cas d'importmap
+#}
+{% block importmap %}{{ importmap(['app', 'new_post']) }}{% endblock %}
