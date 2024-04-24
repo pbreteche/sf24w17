@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\DeleteType;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -146,19 +147,10 @@ class PostController extends AbstractController
         EntityManagerInterface $manager,
     ): Response {
         $confirmationString = $post->getTitle();
-        $form = $this->createFormBuilder()
-            ->add('confirmation', options: [
-                'constraints' => [
-                    new NotBlank(),
-                    new EqualTo($confirmationString),
-                ],
-                'help' => sprintf('La suppression d\'une publication est irréversible. <br>
-        Saisissez le texte suivant pour confirmer :
-                <span style="font-style: italic">%s</span>', $confirmationString),
-                'help_html' => true,
-            ])
-            ->getForm()
-        ;
+        $form = $this->createForm(DeleteType::class, options: [
+            'help' => 'La suppression d\'une publication est irréversible. Tapez %s',
+            'confirmation_message' => $confirmationString,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
