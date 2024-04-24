@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ category.name }}</h1>
+    <p>Publications :</p>
+    {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}
+{% endblock %}
+
+{% block title %}
+    {{ category.name }}
+{% endblock %}
