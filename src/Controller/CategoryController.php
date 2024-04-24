@@ -26,11 +26,9 @@ class CategoryController extends AbstractController
     #[Route('/{id<\d+>}', methods: 'GET')]
     public function show(
         Category $category,
-        PostRepository $postRepository,
     ): Response {
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'posts' => $postRepository->findBy(['filedIn' => $category]),
         ]);
     }
 }

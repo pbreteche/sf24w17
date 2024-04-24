@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use App\Form\DeleteType;
 use App\Form\PostType;
@@ -164,6 +165,15 @@ class PostController extends AbstractController
         return $this->render('post/delete2.html.twig', [
             'post' => $post,
             'delete_form' => $form,
+        ]);
+    }
+
+    public function indexByCategory(
+        Category $category,
+        PostRepository $postRepository,
+    ): Response {
+        return $this->render('post/index_by_category.html.twig', [
+            'posts' => $postRepository->findBy(['filedIn' => $category]),
         ]);
     }
 }

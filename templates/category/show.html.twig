@@ -2,8 +2,9 @@
 
 {% block body %}
     <h1>{{ category.name }}</h1>
-    <p>Publications :</p>
-    {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}
+    {{ render(controller('App\\Controller\\PostController::indexByCategory', {
+        category: category
+    })) }}
 {% endblock %}
 
 {% block title %}
