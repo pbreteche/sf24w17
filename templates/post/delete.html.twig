@@ -16,7 +16,7 @@
             <input type="text" id="delete-confirmation" name="confirmation">
             <input type="hidden" name="token" value="{{ csrf_token('delete_post') }}">
         </div>
-        <button>Confirmer la suppression</button>
+        <button class="btn btn-danger">Confirmer la suppression</button>
     </form>
 
     {# Exemples CSRF = Cross Site Request Forgery #}

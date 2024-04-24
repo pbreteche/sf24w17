@@ -7,7 +7,7 @@
     <form action="{{ path('app_post_search') }}">
         <label for="search-query">Recherche</label>
         <input type="search" id="search-query" name="q">
-        <button>🔎</button>
+        <button class="btn btn-secondary">🔎</button>
     </form>
     <a href="{{ path('app_post_new') }}">Nouvelle</a>
     {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}

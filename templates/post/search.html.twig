@@ -7,7 +7,7 @@
     <form action="{{ path('app_post_search') }}">
         <label for="search-query">Recherche</label>
         <input type="search" id="search-query" name="q" value="{{ query }}">
-        <button>🔎</button>
+        <button class="btn btn-secondary">🔎</button>
     </form>
     {{ include('post/_list.html.twig') }}
 {% endblock %}
