@@ -7,6 +7,7 @@ use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -98,5 +99,24 @@ class Post
         $this->filedIn = $filedIn;
 
         return $this;
+    }
+
+    #[Assert\IsTrue(message: 'Le titre doit comporter  une longueur paire')]
+    public function isTitleLengthEven(): bool
+    {
+        return !(strlen($this->title) % 2);
+    }
+
+    #[Assert\Callback]
+    public function validate(ExecutionContextInterface $context, mixed $payload): void
+    {
+        if (
+            PostState::Published == $this->state
+            && empty($this->body)
+        ) {
+            $context->buildViolation('Body should not be empty for published post')
+                ->atPath('body')
+                ->addViolation();
+        }
     }
 }
