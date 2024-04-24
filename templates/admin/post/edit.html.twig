@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Édition de {{ post.title }}</h1>
-    <a href="{{ path('app_post_delete', {id: post.id}) }}">Supprimer</a>
+    <a href="{{ path('app_admin_post_delete2', {id: post.id}) }}">Supprimer</a>
     {{ include('post/_form.html.twig', {
         form: form_edit,
         action: 'Enregistrer la modification'
