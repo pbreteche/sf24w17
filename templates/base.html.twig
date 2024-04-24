@@ -12,6 +12,7 @@
         {% endblock %}
     </head>
     <body class="container">
+    <img src="{{ asset('images/angular.svg') }}" height="80">
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">

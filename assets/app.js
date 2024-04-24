@@ -1,4 +1,5 @@
 import './bootstrap.js';
+import './js/log.js';
 
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
