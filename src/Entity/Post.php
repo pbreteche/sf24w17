@@ -32,6 +32,9 @@ class Post
     #[ORM\Column(length: 255, enumType: PostState::class)]
     private PostState $state = PostState::Draft;
 
+    #[ORM\ManyToOne]
+    private ?Category $filedIn = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,6 +84,18 @@ class Post
     public function setState(PostState $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getFiledIn(): ?Category
+    {
+        return $this->filedIn;
+    }
+
+    public function setFiledIn(?Category $filedIn): static
+    {
+        $this->filedIn = $filedIn;
 
         return $this;
     }
