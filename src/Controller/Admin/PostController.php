@@ -50,7 +50,7 @@ class PostController extends AbstractController
     // Un seul IsGranted à la fois nécessaire
     #[IsGranted(new Expression('user === object.getAuthoredBy()'), 'post')]
     #[IsGranted('ENTITY_AUTHOR', 'post')]
-    #[isGranted(new Expression('is_granted("ENTITY_AUTHOR", object) or is_granted("ROLE_ADMIN")'), 'post')]
+    #[IsGranted(new Expression('is_granted("ENTITY_AUTHOR", object) or is_granted("ROLE_ADMIN")'), 'post')]
     public function edit(
         Post $post,
         Request $request,
