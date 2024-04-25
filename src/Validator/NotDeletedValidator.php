@@ -25,7 +25,6 @@ class NotDeletedValidator extends ConstraintValidator
             $stringValue = is_string($state) ? $state : $state->value;
             if (strtolower($stringValue) == 'deleted') {
                 $this->context->buildViolation($constraint->message)
-                    ->setParameter('{{ value }}', $stringValue)
                     ->addViolation();
             }
         }

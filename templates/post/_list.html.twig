@@ -3,7 +3,7 @@
         <li>
                 <a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a>
                 {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('app_admin_post_edit', {id: post.id}) }}">éditer</a>
+                <a href="{{ path('app_admin_post_edit', {id: post.id}) }}">{{ 'action.edit'|trans }}</a>
                 {% endif %}
         </li>
     {% else %}

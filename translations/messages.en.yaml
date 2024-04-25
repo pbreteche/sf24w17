@@ -1,0 +1,11 @@
+action:
+  search: Search
+  new: New
+  edit: Edit
+
+result:
+  success:
+    message: It works !
+
+post:
+  last_title: Last posts

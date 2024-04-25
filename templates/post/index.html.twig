@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dernières publications{% endblock %}
+{% block title %}{{ 'post.last_title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1>Dernières publications</h1>
+    <h1>{{ 'post.last_title'|trans }}</h1>
     <form action="{{ path('app_post_search') }}">
-        <label for="search-query">Recherche</label>
+        <label for="search-query">{{ 'action.search'|trans }}</label>
         <input type="search" id="search-query" name="q">
         <button class="btn btn-secondary">🔎</button>
     </form>
-    <a href="{{ path('app_admin_post_new') }}">Nouvelle</a>
+    <p>{{ 'post.count'|trans({'%count%': posts|length}) }}</p>
+    <a href="{{ path('app_admin_post_new') }}">{{ 'action.new'|trans }}</a>
     {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}
 {% endblock %}

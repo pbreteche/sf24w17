@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Nouvelle publication</h1>
+    <h1>{{ 'post.new_title'|trans }}</h1>
     {{ include('admin/post/_form.html.twig', {
         form: form_new,
-        action: 'Enregistrer'
+        action: 'save'
     }) }}
 {% endblock %}
 
