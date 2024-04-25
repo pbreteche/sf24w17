@@ -9,14 +9,26 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_api_token_provider:
+            entity:
+                class: App\Entity\ApiToken
+                property: token
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|assets)/
             security: false
+
+        api:
+            pattern: ^/api
+            provider: app_api_token_provider
+            custom_authenticator:
+                - App\Security\AppApiTokenAuthenticator
+
         main:
             lazy: true
             provider: app_user_provider
-            custom_authenticator: App\Security\AppCustomAuthenticator
+            custom_authenticator:
+                - App\Security\AppCustomAuthenticator
             logout:
                 path: app_security_logout
                 # where to redirect after logout
