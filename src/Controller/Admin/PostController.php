@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -69,6 +70,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/delete/{id<\d+>}', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_SUPER_ADMIN')]
     public function delete(
         Post $post,
         Request $request,
@@ -76,6 +78,11 @@ class PostController extends AbstractController
         ValidatorInterface $validator,
     ): Response {
         $confirmationString = $post->getTitle();
+
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            throw $this->createAccessDeniedException();
+        }
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
 
         if (
             Request::METHOD_POST === $request->getMethod()

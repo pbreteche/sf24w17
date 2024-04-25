@@ -2,6 +2,10 @@
 
 {% block body %}
 <h1>Suppression de {{ post.title }}</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+    <p>Visible uniquement par l'admin.</p>
+    {% endif %}
+
     {% for violation in violations %}
         <p>{{ violation.message }}</p>
     {% endfor %}

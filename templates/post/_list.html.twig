@@ -2,7 +2,9 @@
     {% for post in posts %}
         <li>
                 <a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a>
+                {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('app_admin_post_edit', {id: post.id}) }}">éditer</a>
+                {% endif %}
         </li>
     {% else %}
         <li>{{ empty_message | default('Pas de résultat') }}</li>
