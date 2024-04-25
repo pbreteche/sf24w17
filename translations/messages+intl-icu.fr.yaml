@@ -12,7 +12,7 @@ post:
   new_title: Nouvelle publication
   last_title: Dernières publications
 
-  count: Voici %count% publications
+  count: Voici {count} publications
 
   field:
     title:
