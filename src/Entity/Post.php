@@ -38,6 +38,10 @@ class Post
     #[ORM\ManyToOne]
     private ?Category $filedIn = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $authoredBy = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,5 +124,17 @@ class Post
                 ->atPath('body')
                 ->addViolation();
         }
+    }
+
+    public function getAuthoredBy(): ?User
+    {
+        return $this->authoredBy;
+    }
+
+    public function setAuthoredBy(?User $authoredBy): static
+    {
+        $this->authoredBy = $authoredBy;
+
+        return $this;
     }
 }
