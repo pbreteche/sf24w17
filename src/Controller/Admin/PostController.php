@@ -47,7 +47,10 @@ class PostController extends AbstractController
         ]);
     }
     #[Route('/edit/{id<\d+>}', methods: ['GET', 'POST'])]
+    // Un seul IsGranted à la fois nécessaire
     #[IsGranted(new Expression('user === object.getAuthoredBy()'), 'post')]
+    #[IsGranted('ENTITY_AUTHOR', 'post')]
+    #[isGranted(new Expression('is_granted("ENTITY_AUTHOR", object) or is_granted("ROLE_ADMIN")'), 'post')]
     public function edit(
         Post $post,
         Request $request,
