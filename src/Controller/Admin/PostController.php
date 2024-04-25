@@ -7,6 +7,7 @@ use App\Form\DeleteType;
 use App\Form\PostType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -46,6 +47,7 @@ class PostController extends AbstractController
         ]);
     }
     #[Route('/edit/{id<\d+>}', methods: ['GET', 'POST'])]
+    #[IsGranted(new Expression('user === object.getAuthoredBy()'), 'post')]
     public function edit(
         Post $post,
         Request $request,
