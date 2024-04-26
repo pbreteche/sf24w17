@@ -28,11 +28,18 @@ class PostController extends AbstractController
     #[Route('/{id<\d+>}', methods: 'GET')]
     #[Cache(maxage: 86400, public: true)]
     public function show(
+        Request $request,
         Post $post,
     ): Response {
-        return $this->render('post/show.html.twig', [
+        $response = new Response();
+        $response->setLastModified($post->getUpdatedAt());
+        if ($response->isNotModified($request)) {
+            return $response;
+        }
+
+        return $response->setContent($this->renderView('post/show.html.twig', [
             'post' => $post,
-        ]);
+        ]));
     }
 
     #[Route('/search', methods: 'GET')]
