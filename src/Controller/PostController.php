@@ -32,6 +32,8 @@ class PostController extends AbstractController
         Post $post,
     ): Response {
         $response = new Response();
+        $response->setPublic();
+        $response->headers->addCacheControlDirective('must-revalidate');
         $response->setLastModified($post->getUpdatedAt());
         if ($response->isNotModified($request)) {
             return $response;
