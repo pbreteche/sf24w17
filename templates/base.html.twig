@@ -12,6 +12,10 @@
         {% endblock %}
     </head>
     <body class="container">
+    <div>
+        <a href="?lang=fr">FR</a>
+        <a href="?lang=en">EN</a>
+    </div>
     <img src="{{ asset('images/angular.svg') }}" height="80">
     {% for label, messages in app.flashes %}
         {% for message in messages %}
