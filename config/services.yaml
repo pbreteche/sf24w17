@@ -36,3 +36,6 @@ services:
         arguments:
             - '@Psr\Log\LoggerInterface'
             - '%logger_config%'
+
+    # nécessaire car provenant d'un paquet Composer tiers
+    geoPHP\geoPHP: ~

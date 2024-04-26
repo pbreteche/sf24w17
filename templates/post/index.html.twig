@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1>{{ 'post.last_title'|trans }}</h1>
+    <p>{{ 'àéïôù' | transliterate }}</p>
     <form action="{{ path('app_post_search') }}">
         <label for="search-query">{{ 'action.search'|trans }}</label>
         <input type="search" id="search-query" name="q">

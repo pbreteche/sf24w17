@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d450673661972ac6db05671c042136f9",
+    "content-hash": "80e62d26a35a99ec84fdb0e038b283f6",
     "packages": [
         {
             "name": "composer/semver",
@@ -1372,6 +1372,76 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "funiq/geophp",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/funiq/geoPHP.git",
+                "reference": "82a8f112463f5e9d8dc7664fcd9ee61ce8c50547"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/funiq/geoPHP/zipball/82a8f112463f5e9d8dc7664fcd9ee61ce8c50547",
+                "reference": "82a8f112463f5e9d8dc7664fcd9ee61ce8c50547",
+                "shasum": ""
+            },
+            "require": {
+                "php": "5.5 - 8.2"
+            },
+            "require-dev": {
+                "php": "5.5 - 8.3",
+                "php-coveralls/php-coveralls": "2.*",
+                "phpstan/phpstan": "^0.12.18",
+                "phpunit/phpunit": "5.* || 8.*",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "suggest": {
+                "ext-geos": "GEOS allows more advanced operations"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "geoPHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later",
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Hayes",
+                    "role": "Original creator"
+                },
+                {
+                    "name": "Péter Báthory",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Open-source native PHP library for doing geometry operations. Can read and write a wide variety of formats: (E)WKT, (E)WKB, TWKB, GeoJSON, KML, GPX, GeoRSS. Works with all Simple-Feature geometries (Point, LineString, Polygon...) and can be used to get centroids, bounding-boxes, area, etc.",
+            "homepage": "https://github.com/funiq/geoPHP",
+            "keywords": [
+                "Polygon",
+                "converter",
+                "geoPHP",
+                "geojson",
+                "geometry",
+                "gis",
+                "gpx",
+                "kml",
+                "linestring",
+                "twkb",
+                "wkb",
+                "wkt"
+            ],
+            "support": {
+                "issues": "https://github.com/funiq/geoPHP/issues",
+                "source": "https://github.com/funiq/geoPHP/tree/v2.0.3"
+            },
+            "time": "2023-11-08T09:37:12+00:00"
         },
         {
             "name": "monolog/monolog",
