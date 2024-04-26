@@ -2,7 +2,8 @@
 
 namespace App\EventSubscriber;
 
-use phpDocumentor\Reflection\Types\Self_;
+use App\Entity\User;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -10,6 +11,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class LocaleSubscriber implements EventSubscriberInterface
 {
     public const MANAGED_LOCALE = ['fr', 'en_US', 'en'];
+
+    public function __construct(
+        private readonly Security $security,
+    ) {
+    }
 
     public function preferredLanguage(RequestEvent $event): void
     {
@@ -39,12 +45,21 @@ class LocaleSubscriber implements EventSubscriberInterface
         // * proposer dans l'interface utilisateur un moyen de définir sa locale
     }
 
+    public function userLocale(RequestEvent $requestEvent): void
+    {
+        $user = $this->security->getUser();
+        if ($user instanceof User && $user->getLocale()) {
+            $requestEvent->getRequest()->setLocale($user->getLocale());
+        }
+    }
+
     public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => [
                 ['preferredLanguage', 24],
                 ['inSession', 20],
+                ['userLocale', 18],
             ]
         ];
     }

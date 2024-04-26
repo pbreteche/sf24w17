@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use App\EventSubscriber\LocaleSubscriber;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -33,6 +35,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(length: 5, nullable: true)]
+    #[Assert\Locale(options: LocaleSubscriber::MANAGED_LOCALE)]
+    private ?string $locale = null;
 
     public function __construct()
     {
@@ -117,5 +123,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): static
+    {
+        $this->locale = $locale;
+
+        return $this;
     }
 }
