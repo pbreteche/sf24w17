@@ -21,7 +21,7 @@ class PostType extends AbstractType
             ])
             ->add('body')
             ->add('state', EnumType::class, [
-                'placeholder' => $options['state_placeholder'] ? '--' : null,
+                'placeholder' => $options['state_placeholder'] ? 'default.placeholder' : null,
                 'class' => PostState::class,
                 'choice_label' => fn ($choice) => $choice->t(),
             ])

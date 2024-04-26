@@ -1,0 +1,39 @@
+default:
+  placeholder: --
+
+action:
+  search: Search
+  new: New
+  edit: Edit
+  save: Save
+
+result:
+  success:
+    message: It works !
+
+post:
+  new_title: New post
+  last_title: Last posts
+
+  count: >-
+    {posts, plural,
+        =0    {There is no posts}
+        =1    {There is one post}
+        other {There are # posts !}
+    }
+
+  field:
+    title:
+      label: Title
+    body:
+      label: Body
+    publishedAt:
+      label: Published at
+      value_with_label: Published at {value, date, full}, {value, time, short}
+    state:
+      label: State
+      Draft: Draft
+      Published: Published
+      Deleted: Deleted
+    filedIn:
+      label: Filed in
