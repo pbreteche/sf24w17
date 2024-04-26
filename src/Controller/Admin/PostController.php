@@ -25,6 +25,7 @@ class PostController extends AbstractController
         EntityManagerInterface $manager,
     ): Response {
         $post = new Post();
+        $post->setAuthoredBy($this->getUser());
         $form = $this->createForm(PostType::class, $post, [
             'validation_groups' => ['Default', 'create']
         ]);
