@@ -12,7 +12,12 @@ post:
   new_title: Nouvelle publication
   last_title: Dernières publications
 
-  count: Voici {count} publications
+  count: >-
+    {posts, plural,
+        =0    {Il n'y a aucune publications}
+        =1    {Il y a une publication}
+        other {Il y a # publications !}
+    }
 
   field:
     title:
@@ -21,6 +26,7 @@ post:
       label: Corps
     publishedAt:
       label: Publié le
+      value_with_label: Publié le {value, date, full} à {value, time, short}
     state:
       label: Statut
       Draft: Brouillon

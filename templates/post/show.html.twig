@@ -3,6 +3,7 @@
 {% block body %}
     <h1>{{ post.title }}</h1>
     <p>Publié le : {{ post.publishedAt | format_date('long') }}</p>
+    <p>{{ 'post.field.publishedAt.value_with_label'|trans({value: post.publishedAt}) }}</p>
     <p>Catégorie : {{ post.filedIn.name | default('aucune') }}</p>
     <div>
         {{ post.body | nl2br }}

@@ -9,7 +9,7 @@
         <input type="search" id="search-query" name="q">
         <button class="btn btn-secondary">🔎</button>
     </form>
-    <p>{{ 'post.count'|trans({'count': posts|length}) }}</p>
+    <p>{{ 'post.count'|trans({posts: posts|length}) }}</p>
     <a href="{{ path('app_admin_post_new') }}">{{ 'action.new'|trans }}</a>
     {{ include('post/_list.html.twig', {empty_message: 'Aucune publication actuellement'}) }}
 {% endblock %}
